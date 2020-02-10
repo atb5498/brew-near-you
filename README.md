@@ -27,7 +27,7 @@ So that I can try local beers
 6. Click the black background or the X in the upper-right corner to close the modal
 
 # Link
-https://hhawm.github.io/projectOne/
+https://atb5498.github.io/brew-near-you/
 
 ![alt text](assets/images/landing_page.png "Logo Title Text 1")
 
