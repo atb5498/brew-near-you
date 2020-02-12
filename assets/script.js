@@ -273,7 +273,7 @@ function getLocation() {
     }
 }
 
-// Grabs user's current location
+// Grabs user's current location, makes cards, and displays the results
 function showPosition1(position) {
     let lat = position.coords.latitude;
     let lon = position.coords.longitude;
