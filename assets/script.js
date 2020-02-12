@@ -139,6 +139,7 @@ function closeModal() {
 // Creates cards for each result and displays them in the results section
 searchBtn.on("click", function (event) {
     event.preventDefault();
+
     $("#errorMsg").empty();
     $("#results").empty();
 
@@ -173,7 +174,6 @@ function makeCards(city, state) {
             let brewLat = responseBrew[i].latitude;
 
             if ((brewLon !== null) && (brewLat !== null)) {
-
                 // Create results
                 let brewResults = $("#results");
                 let column = $("<div>").addClass("column is-half");
@@ -183,8 +183,8 @@ function makeCards(city, state) {
                 let mediaContent = $("<div>").addClass("media-content");
                 let title = $("<p>").addClass("title is-4");
 
-                title.text(brewName);
                 //Appending items to resutls
+                title.text(brewName);
                 mediaContent.append(title);
                 media.append(mediaContent);
                 cardContent.append(media);
@@ -206,13 +206,14 @@ function makeCards(city, state) {
                 // Opens modal with map
                 card.on("click", function (event) {
                     event.preventDefault();
+
                     // Does not allow the modal to open if cooridnates are null
                     if ((brewLon !== null) && (brewLat !== null)) {
                         activateModal();
+
                         toMap(brewLat, brewLon);
 
                         let marker = L.marker([brewLat, brewLon]).addTo(mymap);
-
                         let searchURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/matches?name=" + brewName + "&address1=" + brewAddress + "&city=" + brewCity + "&state=" + states[brewState] + "&country=US";
 
                         $.ajax({
@@ -225,7 +226,6 @@ function makeCards(city, state) {
                         }).then(function (data) {
 
                             let brewID = data.businesses[0].id;
-
                             let idURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/" + brewID;
 
                             $.ajax({
@@ -268,8 +268,7 @@ function makeCards(city, state) {
 function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition1);
-    }
-    else {
+    } else {
         return;
     }
 }
@@ -289,7 +288,5 @@ function showPosition1(position) {
         let stateRev = reversedLoc.results[0].locations[0].adminArea3;
 
         makeCards(cityRev, stateTwo[stateRev]);
-
     });
-
 }
